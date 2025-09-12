@@ -77,7 +77,7 @@ body {
   content: "";
   position: absolute;
   top:0; left:0; width:100%; height:100%;
-  background: url('imagenes/proyecto1.jpg') center/cover no-repeat;
+  background: url('./imagenes/proyecto1.jpg') center/cover no-repeat;
   filter: brightness(0.4);
   z-index: -2;
 }
@@ -100,7 +100,7 @@ section {
   opacity: 0;
   transform: translateY(50px);
   transition: all 1s ease;
-  scroll-margin-top: 120px; /* Ajuste para anchors */
+  scroll-margin-top: 120px;
 }
 section.visible { opacity:1; transform:translateY(0); }
 
@@ -181,7 +181,7 @@ footer a { color: var(--blanco); text-decoration: underline; }
 
 <!-- 1: Portada -->
 <section class="section-hero">
-  <img src="imagenes/proyecto2.jpg" alt="Proyecto destacado de automatización en Honduras" loading="eager">
+  <img src="./imagenes/proyecto2.jpg" alt="Proyecto destacado de automatización en Honduras" loading="eager">
   <h1>TCI Técnicos de Control Industrial</h1>
 </section>
 
@@ -219,7 +219,7 @@ footer a { color: var(--blanco); text-decoration: underline; }
 <section id="automatizacion">
   <div class="section-content products-services">
     <div class="box">
-      <img src="imagenes/proyecto3.jpg" alt="Automatización de procesos industriales" loading="lazy">
+      <img src="./imagenes/proyecto3.jpg" alt="Automatización de procesos industriales" loading="lazy">
       <h2>Automatización</h2>
       <ul>
         <li>Instalación de sistemas automatizados</li>
@@ -234,7 +234,7 @@ footer a { color: var(--blanco); text-decoration: underline; }
 <section id="mecanica">
   <div class="section-content products-services">
     <div class="box">
-      <img src="imagenes/proyecto4.jpg" alt="Mantenimiento de maquinaria industrial" loading="lazy">
+      <img src="./imagenes/proyecto4.jpg" alt="Mantenimiento de maquinaria industrial" loading="lazy">
       <h2>Mecánica Industrial</h2>
       <ul>
         <li>Montaje y mantenimiento de maquinaria</li>
@@ -249,7 +249,7 @@ footer a { color: var(--blanco); text-decoration: underline; }
 <section id="electricidad">
   <div class="section-content products-services">
     <div class="box">
-      <img src="imagenes/proyecto5.jpg" alt="Instalación eléctrica industrial en Honduras" loading="lazy">
+      <img src="./imagenes/proyecto5.jpg" alt="Instalación eléctrica industrial en Honduras" loading="lazy">
       <h2>Electricidad Industrial</h2>
       <ul>
         <li>Instalación eléctrica industrial</li>
