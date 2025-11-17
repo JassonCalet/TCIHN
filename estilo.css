@@ -302,13 +302,9 @@ footer a {
 
 .quienes-somos-container {
   position: relative;
-  background-color:#efeeee;
+  background: rgb(196, 194, 194);
   border-radius: 12px;
   box-shadow: 9 10px 25px rgba(0,0,0,0.1);
-}
-
-#quienes-somos {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 }
 
 .texto-y-imagen {
@@ -385,7 +381,7 @@ footer a {
 
 /* ===== Sección Visión/Misión (ajustada) ===== */
 #vision-mision {
-  background-color: #efeeee;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
   padding: 4px;
   min-height: auto;
   height: 300px;
