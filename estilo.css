@@ -1,5 +1,5 @@
 :root {
-  --rojo-vino: #800000;
+  --rojo-vino: rgba(198, 29, 26);
   --blanco: #fff;
   --negro: #000;
 }
@@ -41,7 +41,7 @@ header a {
   margin-left: 63px;
   margin-top: 20px;
   border-radius: 3px;
-  background-color: var(--rojo-vino);
+  background-color: rgba(198, 29, 26);
   width: 190px;
   height: 35px;
   padding: 8px;
@@ -50,7 +50,6 @@ header a {
   text-decoration: none;
   display: inline-block; /* Similar a bloque pero conserva el flujo en línea */
 }
-
 
 header a:hover {
   background-color: #000000; /* Cambiar color de fondo al pasar el mouse */
@@ -221,7 +220,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #550000;
+  background-color: rgba(198, 29, 26);
   transform: scale(1.05);
 }
 
@@ -466,7 +465,7 @@ footer a {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: linear-gradient(270deg, var(--rojo-vino) 0%, #550000 100%);
+  background: linear-gradient(270deg, rgba(198, 29, 26) 20%, #550000 90%);
   color: white;
   border-radius: 8px 8px 0 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -578,7 +577,7 @@ footer a {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(135deg, var(--rojo-vino) 0%, #a00000 100%);
+  background: linear-gradient(135deg, var(--rojo-vino) 0%, rgba(198, 29, 26) 100%);
   color: white;
   border: none;
   padding: 18px 22px;
@@ -592,7 +591,7 @@ footer a {
 }
 
 .carrusel-nav-btn:hover {
-  background: linear-gradient(135deg, #a00000 0%, var(--rojo-vino) 100%);
+  background: linear-gradient(135deg, rgba(198, 29, 26) 0%, var(--rojo-vino) 100%);
   transform: translateY(-50%) scale(1.15);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
@@ -797,9 +796,8 @@ footer a {
 #quienes-somos{
   margin: 0;
   padding-top: 0;
-  margin-left: 50px;
+  padding-left: 50px;
 }
-
 
 #titulo-nosotros { 
   color: var(--negro);
@@ -825,7 +823,6 @@ footer a {
   transition: all 0.3s ease; /* Transición suave para hover */
   filter: brightness(1.02) contrast(1.05); /* Mejora sutil de calidad */
 }
-
 
 /* Marca de agua */
 .quienes-somos-watermark {
