@@ -74,9 +74,8 @@ header a:hover {
 
 /* Logo */
 .menu-hero-sticky .logo img {
-  height: 60px;
-  width: 60px;
-  border-radius: 8px;
+  height: 85px;
+  width: 80px;
   padding: 0;
   margin: 0;
 }
@@ -157,6 +156,10 @@ section.visible {
   border-radius: 5px;
 }
 
+.section-content h2 {
+  margin: 10px;
+}
+
 /* ===== Productos y Servicios ===== */
 .products-services {
   display: flex;
@@ -190,7 +193,7 @@ section.visible {
 /* ===== DATOS DE CONTACTO CON ICONOS ===== */
 
 #contacto h2{
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   margin-top: 70px;
 }
 
@@ -306,11 +309,11 @@ footer p{
 .nombre-empresa {
   flex-grow: 1;
   text-align: left;
-  font-size: 1.3rem;
+  font-size: 1.55rem;
   color: #ffffff;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-left: 20px;
+  font-weight: 650;
+  letter-spacing: 0.65px;
+  margin-left: 5px;
 }
 
 /* Contenedor de tarjetas premium */
@@ -817,14 +820,14 @@ footer p{
 }
 
 /* Subrayado elegante para el título ¿Quiénes Somos? */
-#titulo-nosotros {
+.titulos {
   position: relative;
   display: inline-block;
   padding-bottom: 12px;
 }
 
 /* Barra negra (base) */
-#titulo-nosotros::after {
+.titulos::after {
   content: "";
   position: absolute;
   left: 0;
@@ -835,7 +838,7 @@ footer p{
 }
 
 /* Barra roja (acento) */
-#titulo-nosotros::before {
+.titulos::before {
   content: "";
   position: absolute;
   left: 0;
@@ -865,12 +868,17 @@ footer p{
   padding-left: 50px;
 }
 
-#titulo-nosotros { 
+#quienes-somos h2{
+  margin-left: 50px;
+  margin-top: 60px;
+}
+
+.titulos { 
   color: var(--rojo-vino);
   margin-top: 60px;
-  margin-left: 48px; 
-  font-size: 1.7em; 
-  font-weight: 795;
+  font-size: 1.8em; 
+  font-family: Arial;
+  letter-spacing: 1px;
 }
 
 .texto-quienes-somos p {
@@ -952,8 +960,10 @@ footer p{
   margin-bottom: 20px;
   padding-left: 0;
   color: var(--rojo-vino);
-  font-size: 1.7em; 
-  font-weight: 750;
+  font-size: 1.8em; 
+  font-family: Arial;
+  letter-spacing: 1px;
+  
 }
 
 /* Contenido interno */
