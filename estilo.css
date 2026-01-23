@@ -996,3 +996,99 @@ footer p{
   }
 
 }
+
+/* RESPONSIVE SOLO PARA MÓVIL */
+
+@media (max-width: 768px) {
+
+  /* ===== MENÚ ===== */
+  .menu-hero-sticky {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 15px;
+  }
+
+  .menu-hero-sticky .logo img {
+    width: 180px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .menu-hero-sticky .nav-links {
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  /* ===== HEADER (solo ajusta tamaños, no diseño) ===== */
+  header img {
+    height: 420px;
+  }
+
+  header h1 {
+    width: auto;
+    padding: 110px 20px 0 20px;
+    font-size: 32px;
+  }
+
+  header a {
+    margin-left: 20px;
+    font-size: 16px;
+    width: auto;
+  }
+
+  /* ===== QUIÉNES SOMOS ===== */
+  .quienes-somos-container {
+    margin-top: 40px; /* elimina el hueco gigante */
+  }
+
+  .texto-y-imagen {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .texto-quienes-somos p {
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  .imagen-equipo img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* ===== MISIÓN Y VISIÓN ===== */
+  .contenedor-mision-vision {
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 15px;
+  }
+
+  .contenido-mision,
+  .contenido-vision {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* ===== TARJETAS SERVICIOS ===== */
+  .cards-container-premium {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* ===== CONTACTO ===== */
+  .contacto-datos {
+    gap: 25px;
+  }
+
+  form {
+    padding: 0 10px;
+  }
+
+  /* ===== SECCIONES ===== */
+  section {
+    padding: 40px 15px;
+  }
+}
+
