@@ -263,7 +263,7 @@ form button:hover {
 
 /* ===== Footer ===== */
 footer {
-  background: var(--rojo-vino);
+  background: black;
   color: var(--blanco);
   text-align: center;
   padding: 20px;
@@ -994,3 +994,4 @@ footer p{
   }
 
 }
+
