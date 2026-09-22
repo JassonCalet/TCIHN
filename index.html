@@ -1289,34 +1289,88 @@ tiles.forEach(function(t){
   });
   showInd('ali');
 
-  /* Cotizacion */
-  var dlg = $('#quote'), qSvc = $('#qSvc'), qMsg = $('#qMsg');
-  function openQuote(svc, msg){
-    if(svc){
-      var found = false;
-      Array.prototype.forEach.call(qSvc.options, function(o){if(o.text===svc){qSvc.value=o.value; found=true}});
-      if(!found) qSvc.value='Otro';
-    }
-    if(msg !== undefined) qMsg.value = msg;
-    if(!dlg.open) dlg.showModal();
+ /* Cotizacion */
+var dlg = $('#quote'), qSvc = $('#qSvc'), qMsg = $('#qMsg');
+
+function openQuote(svc, msg){
+  if(svc){
+    var found = false;
+    Array.prototype.forEach.call(qSvc.options, function(o){
+      if(o.text===svc){
+        qSvc.value=o.value;
+        found=true;
+      }
+    });
+    if(!found) qSvc.value='Otro';
   }
-  document.addEventListener('click', function(e){
-    var b = e.target.closest('[data-quote]');
-    if(b){openQuote(b.getAttribute('data-quote'), b.getAttribute('data-msg') || '')}
-  });
-  $('#qClose').addEventListener('click', function(){dlg.close()});
-  dlg.addEventListener('click', function(e){if(e.target===dlg) dlg.close()});
-  $('#qForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    var name = $('#qName').value.trim(), co = $('#qCo').value.trim();
-    var text = 'Hola TCI, soy '+name+(co?' de '+co:'')+'. Necesito: '+qSvc.value+'.'+(qMsg.value.trim()?' '+qMsg.value.trim():'');
+
+  if(msg !== undefined) qMsg.value = msg;
+  if(!dlg.open) dlg.showModal();
+}
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-quote]');
+  if(b){
+    openQuote(
+      b.getAttribute('data-quote'),
+      b.getAttribute('data-msg') || ''
+    );
+  }
+});
+
+$('#qClose').addEventListener('click', function(){
+  dlg.close();
+});
+
+dlg.addEventListener('click', function(e){
+  if(e.target===dlg) dlg.close();
+});
+
+$('#qForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  var name = $('#qName').value.trim();
+  var co = $('#qCo').value.trim();
+  var svc = qSvc.value;
+  var msg = qMsg.value.trim();
+
+  var text = 'Hola TCI, soy '+name+(co?' de '+co:'')+'. Necesito: '+svc+'.'+(msg?' '+msg:'');
+
+  var choice = confirm(
+    '¿Cómo deseas enviar tu solicitud de cotización?\n\n' +
+    'Aceptar = WhatsApp\n' +
+    'Cancelar = Correo electrónico'
+  );
+
+  if(choice){
     var url = 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
+
     dlg.close();
     toast('Abriendo WhatsApp con tu mensaje');
     window.open(url, '_blank', 'noopener');
-    $('#qForm').reset();
-  });
 
+  }else{
+    var subject = 'Solicitud de cotización - TCI';
+
+    var body =
+      'Nombre: '+name+'\n'+
+      'Empresa: '+(co || 'No indicada')+'\n'+
+      'Servicio: '+svc+'\n'+
+      'Descripción: '+(msg || 'No indicada');
+
+    var mailto =
+      'mailto:cotizaciones@tcihn.com?subject='+
+      encodeURIComponent(subject)+
+      '&body='+
+      encodeURIComponent(body);
+
+    dlg.close();
+    toast('Abriendo correo electrónico');
+    window.location.href = mailto;
+  }
+
+  $('#qForm').reset();
+});
   /* WhatsApp */
   function waOpen(t){toast('Abriendo WhatsApp'); window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t), '_blank', 'noopener')}
   var chat = $('#waChat'), waInput = $('#waInput'), waLast = '', waTimer;
