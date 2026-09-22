@@ -957,10 +957,9 @@ dialog[open]{animation:pop .25s ease}
       tiles.forEach(function(t){t.hidden = !(ch.dataset.f==='all' || t.dataset.cat===ch.dataset.f)});
     });
   });
-  tiles.forEach(function(t){
+ tiles.forEach(function(t){
     t.addEventListener('click', function(){
-      var svc = {tableros:'Electricidad industrial', motores:'Mecánica industrial', variadores:'Variadores, servos y drives', automatizacion:'Automatización y control'}[t.dataset.cat];
-      openQuote(svc, 'Me interesa un trabajo como: '+t.dataset.t+'.');
+      toast('Todavía no hay fotografías para este proyecto.');
     });
   });
 
