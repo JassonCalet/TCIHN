@@ -407,6 +407,41 @@ dialog[open]{animation:pop .25s ease}
   opacity:.7;
   font-size:14px;
 }
+  .tile-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:1;
+}
+
+.tile-overlay{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:linear-gradient(
+    180deg,
+    transparent 20%,
+    rgba(0,0,0,.82) 100%
+  );
+}
+
+.tile span,
+.tile small{
+  position:relative;
+  z-index:3;
+}
+
+.tile .big{
+  position:absolute;
+  top:14px;
+  right:14px;
+  font-size:56px;
+  color:rgba(255,255,255,.22);
+  z-index:3;
+}
 </style>
 </head>
 <body>
@@ -644,8 +679,9 @@ dialog[open]{animation:pop .25s ease}
     class="tile w2"
     data-cat="automatizacion"
     data-t="Programación de PLC"
-    data-images="[]">
-
+    data-images='["Imagenes/1. PLC Y HMI/2. PLC.jpg"]
+<img class="tile-img" src="Imagenes/1. PLC Y HMI/2. PLC.jpg" alt="Programación de PLC">
+  <div class="tile-overlay"></div>
     <svg class="ico big">
       <use href="#i-cpu"/>
     </svg>
