@@ -320,6 +320,92 @@ dialog[open]{animation:pop .25s ease}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
+.photo-dialog{
+  width:100%;
+  height:100%;
+  max-width:none;
+  max-height:none;
+  padding:0;
+  border:0;
+  background:rgba(0,0,0,.92);
+}
+
+.photo-dialog::backdrop{
+  background:rgba(0,0,0,.92);
+}
+
+.photo-viewer{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.photo-viewer img{
+  max-width:90%;
+  max-height:82%;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.photo-close{
+  position:absolute;
+  top:18px;
+  right:22px;
+  z-index:5;
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  font-size:30px;
+  cursor:pointer;
+}
+
+.photo-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:5;
+  width:48px;
+  height:64px;
+  border:0;
+  border-radius:12px;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  font-size:42px;
+  cursor:pointer;
+}
+
+.photo-prev{
+  left:18px;
+}
+
+.photo-next{
+  right:18px;
+}
+
+.photo-info{
+  position:absolute;
+  bottom:24px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#fff;
+}
+
+#photoTitle{
+  font-weight:700;
+  font-size:18px;
+}
+
+#photoCounter{
+  margin-top:5px;
+  opacity:.7;
+  font-size:14px;
 }
 </style>
 </head>
@@ -957,11 +1043,116 @@ dialog[open]{animation:pop .25s ease}
       tiles.forEach(function(t){t.hidden = !(ch.dataset.f==='all' || t.dataset.cat===ch.dataset.f)});
     });
   });
- tiles.forEach(function(t){
-    t.addEventListener('click', function(){
-      toast('Todavía no hay fotografías para este proyecto.');
-    });
+ var photoDialog = $('#photoDialog');
+var photoImage = $('#photoImage');
+var photoTitle = $('#photoTitle');
+var photoCounter = $('#photoCounter');
+var photoPrev = $('#photoPrev');
+var photoNext = $('#photoNext');
+var photoClose = $('#photoClose');
+
+var currentPhotos = [];
+var currentPhotoIndex = 0;
+
+function getTilePhotos(tile){
+  try{
+    var data = JSON.parse(tile.dataset.images || '[]');
+    if(Array.isArray(data)){
+      return data.filter(function(item){
+        return typeof item === 'string' && item.trim() !== '';
+      });
+    }
+  }catch(e){}
+  return [];
+}
+
+function renderPhoto(){
+  if(!photoImage || !currentPhotos.length) return;
+
+  photoImage.src = currentPhotos[currentPhotoIndex];
+
+  if(photoCounter){
+    photoCounter.textContent =
+      'Fotografía ' + (currentPhotoIndex + 1) +
+      ' de ' + currentPhotos.length;
+  }
+
+  if(photoPrev) photoPrev.disabled = currentPhotos.length <= 1;
+  if(photoNext) photoNext.disabled = currentPhotos.length <= 1;
+}
+
+function openPhotos(tile){
+  var photos = getTilePhotos(tile);
+
+  if(!photos.length){
+    toast('Todavía no hay fotografías para este proyecto.');
+    return;
+  }
+
+  currentPhotos = photos;
+  currentPhotoIndex = 0;
+
+  if(photoTitle){
+    photoTitle.textContent = tile.dataset.t || 'Proyecto TCI';
+  }
+
+  renderPhoto();
+
+  if(photoDialog){
+    photoDialog.showModal();
+  }
+}
+
+function closePhotos(){
+  if(photoDialog && photoDialog.open){
+    photoDialog.close();
+  }
+}
+
+function previousPhoto(){
+  if(currentPhotos.length <= 1) return;
+
+  currentPhotoIndex =
+    (currentPhotoIndex - 1 + currentPhotos.length) %
+    currentPhotos.length;
+
+  renderPhoto();
+}
+
+function nextPhoto(){
+  if(currentPhotos.length <= 1) return;
+
+  currentPhotoIndex =
+    (currentPhotoIndex + 1) % currentPhotos.length;
+
+  renderPhoto();
+}
+
+if(photoPrev) photoPrev.addEventListener('click', previousPhoto);
+if(photoNext) photoNext.addEventListener('click', nextPhoto);
+if(photoClose) photoClose.addEventListener('click', closePhotos);
+
+if(photoDialog){
+  photoDialog.addEventListener('click', function(e){
+    if(e.target === photoDialog){
+      closePhotos();
+    }
   });
+}
+
+document.addEventListener('keydown', function(e){
+  if(!photoDialog || !photoDialog.open) return;
+
+  if(e.key === 'ArrowLeft') previousPhoto();
+  if(e.key === 'ArrowRight') nextPhoto();
+  if(e.key === 'Escape') closePhotos();
+});
+
+tiles.forEach(function(t){
+  t.addEventListener('click', function(){
+    openPhotos(t);
+  });
+});
 
   /* Industrias */
   var inds = {
@@ -1034,7 +1225,31 @@ dialog[open]{animation:pop .25s ease}
     new IntersectionObserver(function(es){es.forEach(function(e){fab.classList.toggle('hide', e.isIntersecting)})}).observe($('#whatsapp'));
   }
 })();
-</script>
+</script> 
+  <dialog id="photoDialog" class="photo-dialog">
+  <div class="photo-viewer">
+
+    <button class="photo-close" id="photoClose" aria-label="Cerrar">
+      ×
+    </button>
+
+    <button class="photo-nav photo-prev" id="photoPrev" aria-label="Fotografía anterior">
+      ‹
+    </button>
+
+    <img id="photoImage" src="" alt="Fotografía del proyecto">
+
+    <button class="photo-nav photo-next" id="photoNext" aria-label="Fotografía siguiente">
+      ›
+    </button>
+
+    <div class="photo-info">
+      <div id="photoTitle"></div>
+      <div id="photoCounter"></div>
+    </div>
+
+  </div>
+</dialog>
 </body>
 </html>
 
