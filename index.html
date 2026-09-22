@@ -173,6 +173,36 @@ h2{font-family:var(--display);font-weight:800;font-size:clamp(38px,5vw,60px);lin
 .tile{position:relative;border-radius:12px;overflow:hidden;text-align:left;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;border:1px solid var(--panel-line);background:linear-gradient(150deg,var(--c1),var(--c2));transition:transform .25s,box-shadow .25s,opacity .25s}
 .tile::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:26px 26px}
 .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,14,.85),transparent 65%)}
+
+.tile-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:0;
+}
+
+.tile::before{
+  z-index:1;
+}
+
+.tile::after{
+  z-index:2;
+  background:linear-gradient(to top,rgba(8,10,14,.88),transparent 65%);
+}
+
+.tile .big{
+  z-index:3;
+}
+
+.tile span,
+.tile small{
+  position:relative;
+  z-index:4;
+}
+  
 .tile .big{position:absolute;top:14px;right:14px;font-size:56px;color:rgba(255,255,255,.22);transition:transform .35s,color .3s}
 .tile span,.tile small{position:relative;z-index:1}
 .tile span{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.1}
