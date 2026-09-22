@@ -988,11 +988,18 @@ dialog[open]{animation:pop .25s ease}
 
 <div id="toast" role="status" aria-live="polite"></div>
 </section>
-
+  
 <dialog id="photoDialog" class="photo-dialog">
-    ...todo lo que tenía...
-</dialog>
+  <div class="photo-viewer">
+    <button type="button" id="photoPrev" aria-label="Fotografía anterior">‹</button>
 
+    <img id="photoImage" class="photo-image" src="" alt="Fotografía de Programación de PLC">
+
+    <button type="button" id="photoNext" aria-label="Fotografía siguiente">›</button>
+
+    <button type="button" id="photoClose" class="photo-close" aria-label="Cerrar">×</button>
+  </div>
+</dialog>
 <script>
 (function(){
   // Para conectar WhatsApp real, escribe el número con código de país. Ejemplo: "50499999999"
