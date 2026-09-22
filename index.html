@@ -457,11 +457,12 @@ dialog[open]{animation:pop .25s ease}
     rgba(0,0,0,.82) 100%
   );
 }
-
 .tile span,
 .tile small{
   position:relative;
   z-index:3;
+}
+
 .tile .big{
   position:absolute;
   top:14px;
@@ -703,12 +704,13 @@ dialog[open]{animation:pop .25s ease}
 
 
   <!-- 4. PLC -->
-  <button
-    class="tile w2"
-    data-cat="automatizacion"
-    data-t="Programación de PLC"
-    data-images='["Imagenes/1. PLC Y HMI/2. PLC.jpg"]
-<img class="tile-img" src="Imagenes/1. PLC Y HMI/2. PLC.jpg" alt="Programación de PLC">
+<button
+  type="button"
+  class="tile w2"
+  data-cat="automatizacion"
+  data-t="Programación de PLC"
+  data-images='["Imagenes/1. PLC Y HMI/2. PLC.jpg"]'>
+  <img class="tile-img" src="Imagenes/1. PLC Y HMI/2. PLC.jpg" alt="Programación de PLC">
   <div class="tile-overlay"></div>
     <svg class="ico big">
       <use href="#i-cpu"/>
@@ -1289,8 +1291,7 @@ tiles.forEach(function(t){
     new IntersectionObserver(function(es){es.forEach(function(e){fab.classList.toggle('hide', e.isIntersecting)})}).observe($('#whatsapp'));
   }
 })();
-</script> 
-  <dialog id="photoDialog" class="photo-dialog">
+ <dialog id="photoDialog" class="photo-dialog">
   <div class="photo-viewer">
 
     <button class="photo-close" id="photoClose" aria-label="Cerrar">
@@ -1313,7 +1314,8 @@ tiles.forEach(function(t){
     </div>
 
   </div>
-</dialog>
+</dialog> 
+</script> 
 </body>
 </html>
 
