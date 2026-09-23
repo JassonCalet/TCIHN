@@ -924,30 +924,92 @@ dialog[open]{animation:pop .25s ease}
 <section class="s wa" id="whatsapp" aria-labelledby="h-wa" style="padding-top:0">
   <div class="wrap wa-grid">
     <div>
-      <h2 id="h-wa">Escríbenos</h2>
-      <p class="sec-intro" style="margin-top:14px">Elige un tema y mira cómo quedaría tu mensaje. Después lo abres en WhatsApp con un toque.</p>
-      <div class="wa-topics">
-        <button class="wa-topic" data-m="Hola TCI, tengo una falla urgente en un equipo y necesito apoyo técnico."><svg class="ico"><use href="#i-alert"/></svg>Tengo una falla urgente</button>
-        <button class="wa-topic" data-m="Hola TCI, quiero solicitar una cotización."><svg class="ico"><use href="#i-check"/></svg>Quiero una cotización</button>
-        <button class="wa-topic" data-m="Hola TCI, quiero agendar una visita gratuita a mi planta."><svg class="ico"><use href="#i-clock"/></svg>Agendar visita gratuita</button>
-        <button class="wa-topic" data-m="Hola TCI, necesito personal técnico para un proyecto."><svg class="ico"><use href="#i-users"/></svg>Necesito personal técnico</button>
-      </div>
-      <button class="btn" id="waOpen"><svg class="ico"><use href="#i-chat"/></svg>Abrir en WhatsApp</button>
-    </div>
-    <div class="phone" role="group" aria-label="Vista previa de la conversación">
-      <div class="phone-head">
-        <svg class="lg" viewBox="0 0 44 36" aria-hidden="true"><path d="M0 4h26v9H14L0 4z" fill="#F4F5F7"/><path d="M26 0h8v22l-14 14V25l6-6z" fill="#D91E2A"/></svg>
-        <div><b>TCI Técnicos de Control Industrial</b><small>Atención por WhatsApp</small></div>
-      </div>
-      <div class="chat" id="waChat" aria-live="polite"><div class="bubble in">Hola, somos TCI. ¿En qué podemos ayudarte?</div></div>
-      <form class="phone-in" id="waForm">
-        <input id="waInput" placeholder="Escribe tu mensaje" aria-label="Escribe tu mensaje" autocomplete="off">
-        <button class="send" type="submit" aria-label="Enviar mensaje"><svg class="ico"><use href="#i-chat"/></svg></button>
-      </form>
-    </div>
-  </div>
-</section>
+     <h2 id="h-wa">Escríbenos</h2>
 
+<p class="sec-intro" style="margin-top:14px">
+  Cuéntanos qué necesitas y prepara tu mensaje para nuestro equipo.
+</p>
+
+<div class="wa-topics">
+
+  <button class="wa-topic" data-m="Hola TCI, tengo una falla urgente en un equipo y necesito apoyo técnico.">
+    <svg class="ico"><use href="#i-alert"/></svg>
+    Falla urgente
+  </button>
+
+  <button class="wa-topic" data-m="Hola TCI, quiero solicitar una cotización para un servicio industrial.">
+    <svg class="ico"><use href="#i-check"/></svg>
+    Solicitar cotización
+  </button>
+
+  <button class="wa-topic" data-m="Hola TCI, me gustaría coordinar una visita técnica a mi planta.">
+    <svg class="ico"><use href="#i-clock"/></svg>
+    Coordinar visita
+  </button>
+
+  <button class="wa-topic" data-m="Hola TCI, necesito personal técnico para un proyecto industrial.">
+    <svg class="ico"><use href="#i-users"/></svg>
+    Personal técnico
+  </button>
+
+</div>
+
+<button class="btn" id="waOpen">
+  <svg class="ico"><use href="#i-chat"/></svg>
+  Continuar por WhatsApp
+</button>
+
+</div>
+
+<div class="phone" role="group" aria-label="Vista previa de la conversación">
+
+  <div class="phone-head">
+
+    <img
+      class="lg"
+      src="logo-tci.png"
+      alt="TCI - Técnicos de Control Industrial"
+    >
+
+    <div>
+      <b>TCI – Técnicos de Control Industrial</b>
+      <small>Atención por WhatsApp</small>
+    </div>
+
+  </div>
+
+  <div class="chat" id="waChat" aria-live="polite">
+
+    <div class="bubble in">
+      ¡Hola! Somos TCI 👋<br>
+      Cuéntanos qué necesitas y con gusto te ayudamos.
+    </div>
+
+  </div>
+
+  <form class="phone-in" id="waForm">
+
+    <input
+      id="waInput"
+      placeholder="Escribe tu mensaje..."
+      aria-label="Escribe tu mensaje"
+      autocomplete="off"
+    >
+
+    <button
+      class="send"
+      type="submit"
+      aria-label="Enviar mensaje"
+    >
+      <svg class="ico"><use href="#i-chat"/></svg>
+    </button>
+
+  </form>
+
+</div>
+
+</div>
+</section>
 <!-- CTA -->
 <section class="cta" id="cta" aria-labelledby="h-cta">
   <div class="wrap">
