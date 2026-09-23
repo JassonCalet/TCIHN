@@ -1579,25 +1579,289 @@ $('#sendEmail').addEventListener('click', function(){
   $('#qForm').reset();
 });
   /* WhatsApp */
-  function waOpen(t){toast('Abriendo WhatsApp'); window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t), '_blank', 'noopener')}
-  var chat = $('#waChat'), waInput = $('#waInput'), waLast = '', waTimer;
-  function addBubble(cls, text){var d = document.createElement('div'); d.className = 'bubble '+cls; d.textContent = text; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d}
-  function waSay(text){
-    waLast = text; clearTimeout(waTimer);
-    $$('.bubble.typing', chat).forEach(function(n){n.remove()});
-    addBubble('out', text);
-    var t = addBubble('in typing', ''); t.innerHTML = '<i></i><i></i><i></i>'; chat.scrollTop = chat.scrollHeight;
-    waTimer = setTimeout(function(){t.remove(); addBubble('in', 'Recibido. Un técnico de TCI te responde por aquí.')}, 1300);
+
+function waOpen(t){
+  toast('Abriendo WhatsApp');
+  window.open(
+    'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t),
+    '_blank',
+    'noopener'
+  );
+}
+
+var chat = $('#waChat');
+var waInput = $('#waInput');
+var waLast = '';
+var waTimer;
+
+var waData = {
+  type: '',
+  answers: []
+};
+
+function addBubble(cls, text){
+  var d = document.createElement('div');
+  d.className = 'bubble '+cls;
+  d.textContent = text;
+  chat.appendChild(d);
+  chat.scrollTop = chat.scrollHeight;
+  return d;
+}
+
+function botReply(text, delay){
+  clearTimeout(waTimer);
+
+  var typing = addBubble('in typing', '');
+  typing.innerHTML = '<i></i><i></i><i></i>';
+
+  waTimer = setTimeout(function(){
+    typing.remove();
+    addBubble('in', text);
+  }, delay || 900);
+}
+
+function resetChat(){
+  chat.innerHTML =
+    '<div class="bubble in">' +
+    '¡Hola! Somos TCI 👋<br>' +
+    'Cuéntanos qué necesitas y te ayudamos a orientarlo.' +
+    '</div>';
+
+  waInput.value = '';
+  waLast = '';
+
+  waData = {
+    type: '',
+    answers: []
+  };
+}
+
+function startConversation(type){
+
+  resetChat();
+
+  waData.type = type;
+
+  var firstMessage = '';
+  var question = '';
+
+  if(type === 'falla'){
+
+    firstMessage = '🔧 Tengo una falla';
+
+    question =
+      'Claro. Cuéntanos, ¿qué equipo o máquina está presentando la falla?';
+
   }
-  $$('.wa-topic').forEach(function(b){b.addEventListener('click', function(){waSay(b.dataset.m)})});
-  $('#waForm').addEventListener('submit', function(e){e.preventDefault(); var v = waInput.value.trim(); if(!v) return; waInput.value = ''; waSay(v)});
-  $('#waOpen').addEventListener('click', function(){waOpen(waLast || 'Hola TCI, quiero información de sus servicios.')});
-  var fab = $('#waFab');
-  fab.addEventListener('click', function(){waOpen('Hola TCI, quiero información de sus servicios.')});
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(es){es.forEach(function(e){fab.classList.toggle('hide', e.isIntersecting)})}).observe($('#whatsapp'));
+
+  if(type === 'planta'){
+
+    firstMessage = '🏭 Necesito apoyo en planta';
+
+    question =
+      'Con gusto. ¿Qué tipo de apoyo necesitas en tu planta?';
+
   }
-})();
+
+  if(type === 'personal'){
+
+    firstMessage = '👷 Necesito personal técnico';
+
+    question =
+      'Perfecto. ¿Qué tipo de personal técnico necesitas para tu proyecto?';
+
+  }
+
+  if(type === 'consulta'){
+
+    firstMessage = '💬 Tengo una consulta';
+
+    question =
+      'Claro 😊. Cuéntanos qué deseas consultar con nuestro equipo.';
+
+  }
+
+  addBubble('out', firstMessage);
+
+  botReply(question, 1000);
+
+  waInput.focus();
+}
+
+function continueConversation(answer){
+
+  if(!waData.type) return;
+
+  waData.answers.push(answer);
+
+  addBubble('out', answer);
+
+  var question = '';
+  var count = waData.answers.length;
+
+  if(waData.type === 'falla'){
+
+    if(count === 1){
+      question =
+        'Entendido. ¿Qué está ocurriendo con el equipo? Si aparece alguna alarma o código, puedes indicarlo.';
+    }
+
+    else if(count === 2){
+      question =
+        'Gracias por la información. ¿La máquina está completamente detenida o todavía funciona parcialmente?';
+    }
+
+    else{
+      question =
+        'Perfecto, ya tenemos información inicial del caso. Puedes continuar la conversación directamente con nuestro equipo.';
+    }
+  }
+
+  if(waData.type === 'planta'){
+
+    if(count === 1){
+      question =
+        'Entendido. ¿Se trata de mantenimiento, electricidad, automatización, mecánica u otro tipo de trabajo?';
+    }
+
+    else if(count === 2){
+      question =
+        'Perfecto. ¿En qué ciudad o zona se encuentra la planta?';
+    }
+
+    else{
+      question =
+        'Gracias. Ya podemos continuar con estos detalles directamente con nuestro equipo.';
+    }
+  }
+
+  if(waData.type === 'personal'){
+
+    if(count === 1){
+      question =
+        '¿Qué perfil necesitas: electricistas, mecánicos, técnicos en automatización u otro?';
+    }
+
+    else if(count === 2){
+      question =
+        '¿Aproximadamente cuántas personas necesitas y por cuánto tiempo?';
+    }
+
+    else{
+      question =
+        'Perfecto. Con esta información podemos continuar directamente con nuestro equipo.';
+    }
+  }
+
+  if(waData.type === 'consulta'){
+
+    if(count === 1){
+      question =
+        'Gracias. ¿Hay algún equipo, servicio o proyecto específico relacionado con tu consulta?';
+    }
+
+    else if(count === 2){
+      question =
+        'Perfecto. Si tienes algún detalle adicional, puedes escribirlo aquí.';
+    }
+
+    else{
+      question =
+        'Gracias por la información. Podemos continuar esta conversación directamente con nuestro equipo.';
+    }
+  }
+
+  botReply(question, 1000);
+
+  waLast = answer;
+}
+
+$$('.wa-topic').forEach(function(b){
+
+  b.addEventListener('click', function(){
+
+    startConversation(b.dataset.type);
+
+  });
+
+});
+
+$('#waForm').addEventListener('submit', function(e){
+
+  e.preventDefault();
+
+  var v = waInput.value.trim();
+
+  if(!v) return;
+
+  waInput.value = '';
+
+  continueConversation(v);
+
+});
+
+$('#waOpen').addEventListener('click', function(){
+
+  var message = '';
+
+  if(waData.type){
+
+    var typeName = '';
+
+    if(waData.type === 'falla') typeName = 'Tengo una falla';
+    if(waData.type === 'planta') typeName = 'Necesito apoyo en planta';
+    if(waData.type === 'personal') typeName = 'Necesito personal técnico';
+    if(waData.type === 'consulta') typeName = 'Tengo una consulta';
+
+    message =
+      'Hola TCI, quiero continuar una consulta desde su página web.\n\n' +
+      'Tema: ' + typeName + '\n\n';
+
+    waData.answers.forEach(function(answer, index){
+
+      message +=
+        'Información ' + (index + 1) + ': ' +
+        answer + '\n';
+
+    });
+
+  }else{
+
+    message =
+      'Hola TCI, quiero información sobre sus servicios.';
+
+  }
+
+  waOpen(message);
+
+});
+
+var fab = $('#waFab');
+
+fab.addEventListener('click', function(){
+
+  waOpen(
+    'Hola TCI, quiero información de sus servicios.'
+  );
+
+});
+
+if('IntersectionObserver' in window){
+
+  new IntersectionObserver(function(es){
+
+    es.forEach(function(e){
+
+      fab.classList.toggle(
+        'hide',
+        e.isIntersecting
+      );
+
+    });
+
+  }).observe($('#whatsapp'));
+
+}
 </script>
 </body>
 </html>
