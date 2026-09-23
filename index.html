@@ -471,241 +471,10 @@ dialog[open]{animation:pop .25s ease}
   font-size:56px;
   color:rgba(255,255,255,.22);
   z-index:3;
-/* MISIÓN Y VISIÓN */
-
-.mission-vision-layout{
-  display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
-  gap:24px;
-  width:100%;
-  max-width:1150px;
-  margin:0 auto;
-  align-items:stretch;
 }
-
-.mission-vision-cards{
-  display:grid;
-  grid-template-rows:1fr 1fr;
-  gap:18px;
-}
-
-.mv-card{
-  position:relative;
-  min-height:0;
-  padding:28px 30px;
-  border:1px solid var(--panel-line);
-  border-radius:16px;
-  background:linear-gradient(
-    145deg,
-    var(--panel),
-    rgba(255,255,255,.025)
-  );
-  display:flex;
-  align-items:center;
-  gap:20px;
-  overflow:hidden;
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease;
-}
-
-.mv-card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:4px;
-  height:100%;
-  background:linear-gradient(
-    180deg,
-    var(--c1),
-    var(--c2)
-  );
-}
-
-.mv-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 16px 32px rgba(0,0,0,.22);
-  border-color:rgba(240,52,63,.45);
-}
-
-.mv-icon{
-  width:54px;
-  height:54px;
-  min-width:54px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:rgba(217,30,42,.12);
-  border:1px solid rgba(240,52,63,.28);
-  color:var(--c2);
-}
-
-.mv-icon .ico{
-  width:26px;
-  height:26px;
-}
-
-.mv-content{
-  flex:1;
-}
-
-.mv-label{
-  display:block;
-  margin-bottom:6px;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  color:var(--c2);
-}
-
-.mv-content h3{
-  margin:0 0 9px;
-  font-size:25px;
-  line-height:1.1;
-}
-
-.mv-content p{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
-}
-
-
-/* IMAGEN */
-
-.mv-image{
-  position:relative;
-  min-height:100%;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid var(--panel-line);
-  background:#111;
-}
-
-.mv-image img{
-  width:100%;
-  height:100%;
-  min-height:350px;
-  object-fit:cover;
-  display:block;
-  filter:brightness(.72) contrast(1.08);
-  transition:transform .5s ease;
-}
-
-.mv-image:hover img{
-  transform:scale(1.04);
-}
-
-.mv-image-overlay{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.05) 30%,
-      rgba(0,0,0,.82) 100%
-    );
-  pointer-events:none;
-}
-
-.mv-image-caption{
-  position:absolute;
-  left:24px;
-  right:24px;
-  bottom:22px;
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-.mv-image-caption span{
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:2px;
-  color:var(--c2);
-}
-
-.mv-image-caption strong{
-  font-size:18px;
-  color:#fff;
-  line-height:1.2;
-}
-
-
-/* TABLET */
-
-@media(max-width:900px){
-
-  .mission-vision-layout{
-    grid-template-columns:1fr;
-  }
-
-  .mv-image{
-    min-height:300px;
-  }
-
-  .mv-image img{
-    min-height:300px;
-  }
-
-}
-
-
-/* CELULAR */
-
-@media(max-width:600px){
-
-  .mission-vision-cards{
-    gap:14px;
-  }
-
-  .mv-card{
-    padding:23px 22px;
-    gap:16px;
-  }
-
-  .mv-icon{
-    width:48px;
-    height:48px;
-    min-width:48px;
-  }
-
-  .mv-icon .ico{
-    width:23px;
-    height:23px;
-  }
-
-  .mv-content h3{
-    font-size:23px;
-  }
-
-  .mv-content p{
-    font-size:14px;
-    line-height:1.55;
-  }
-
-  .mv-image{
-    min-height:260px;
-  }
-
-  .mv-image img{
-    min-height:260px;
-  }
-
-  .mv-image-caption{
-    left:20px;
-    right:20px;
-    bottom:18px;
-  }
-
-  .mv-image-caption strong{
-    font-size:16px;
-  }
-
-}
+</style>
+</head>
+<body>
 
 <!-- Iconos -->
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
@@ -1233,67 +1002,61 @@ dialog[open]{animation:pop .25s ease}
       </p>
     </div>
 
-    <div class="mission-vision-layout">
+    <div class="cards mission-vision">
 
-      <div class="mission-vision-cards">
+      <!-- MISIÓN -->
+      <article class="card">
 
-        <!-- MISIÓN -->
-        <article class="mv-card">
+        <div class="inner">
 
-          <div class="mv-icon">
+          <div class="glyph">
             <svg class="ico">
-              <use href="#i-check"/>
+              <use href="#i-target"/>
             </svg>
           </div>
 
-          <div class="mv-content">
+          <h3>Misión</h3>
 
-            <span class="mv-label">NUESTRO PROPÓSITO</span>
+          <p>
+            Ofrecer soluciones técnicas en electricidad, automatización,
+            mecánica industrial y mantenimiento de maquinaria con altos
+            estándares de calidad y seguridad.
+          </p>
 
-            <h3>Misión</h3>
+        </div>
 
-            <p>
-              Ofrecer soluciones técnicas en electricidad, automatización,
-              mecánica industrial y mantenimiento de maquinaria con altos
-              estándares de calidad y seguridad.
-            </p>
-
-          </div>
-
-        </article>
+      </article>
 
 
-        <!-- VISIÓN -->
-        <article class="mv-card">
+      <!-- VISIÓN -->
+      <article class="card">
 
-          <div class="mv-icon">
+        <div class="inner">
+
+          <div class="glyph">
             <svg class="ico">
-              <use href="#i-cpu"/>
+              <use href="#i-eye"/>
             </svg>
           </div>
 
-          <div class="mv-content">
+          <h3>Visión</h3>
 
-            <span class="mv-label">HACIA DÓNDE VAMOS</span>
+          <p>
+            Convertirnos en la empresa referente en servicios técnicos y de
+            automatización industrial en Honduras, reconocidos por nuestra
+            innovación y excelencia.
+          </p>
 
-            <h3>Visión</h3>
+        </div>
 
-            <p>
-              Convertirnos en la empresa referente en servicios técnicos y de
-              automatización industrial en Honduras, reconocidos por nuestra
-              innovación y excelencia.
-            </p>
-
-          </div>
-
-        </article>
-
-      </div>
+      </article>
 
     </div>
+
   </div>
+
 </section>
-    
+
 <!-- OPERACION -->
 <section class="s op" id="operacion" aria-labelledby="h-op">
   <div class="wrap">
