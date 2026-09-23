@@ -1707,6 +1707,7 @@ dialog[open]{animation:pop .25s ease}
   /* Tarjetas expandibles + brillo con el cursor */
   $$('.cards .card').forEach(function(c){
     var h = $('.head', c);
+    if(!h) return;
     h.addEventListener('click', function(){
       var o = c.getAttribute('data-open') === 'true';
       c.setAttribute('data-open', !o); h.setAttribute('aria-expanded', !o);
