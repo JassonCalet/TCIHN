@@ -998,25 +998,119 @@ dialog[open]{animation:pop .25s ease}
 <!-- Cotización -->
 <dialog id="quote" aria-labelledby="qTitle">
   <div class="dlg">
-    <button class="close" id="qClose" aria-label="Cerrar"><svg class="ico"><use href="#i-x"/></svg></button>
+
+    <button class="close" id="qClose" aria-label="Cerrar">
+      <svg class="ico"><use href="#i-x"/></svg>
+    </button>
+
     <h3 id="qTitle">Solicitar cotización</h3>
-    <p class="sub">Llena los datos y luego elige como quieres enviar tu solicitud.</p>
+
+    <p class="sub" id="qSubtitle">
+      Llena los datos de tu solicitud.
+    </p>
+
     <form id="qForm">
+
       <div class="row2">
-        <div class="field"><label for="qName">Nombre</label><input id="qName" required autocomplete="name"></div>
-        <div class="field"><label for="qCo">Empresa</label><input id="qCo" autocomplete="organization"></div>
+
+        <div class="field">
+          <label for="qName">Nombre</label>
+          <input id="qName" required autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="qCo">Empresa</label>
+          <input id="qCo" autocomplete="organization">
+        </div>
+
       </div>
-      <div class="field"><label for="qSvc">¿Qué necesitas?</label>
+
+      <div class="field">
+        <label for="qSvc">¿Qué necesitas?</label>
+
         <select id="qSvc">
-          <option>Mantenimiento industrial</option><option>Electricidad industrial</option><option>Automatización y control</option><option>Mecánica industrial</option><option>Variadores, servos y drives</option><option>Instalación y puesta en marcha</option><option>Personal técnico</option><option>Otro</option>
+          <option>Mantenimiento industrial</option>
+          <option>Electricidad industrial</option>
+          <option>Automatización y control</option>
+          <option>Mecánica industrial</option>
+          <option>Variadores, servos y drives</option>
+          <option>Instalación y puesta en marcha</option>
+          <option>Personal técnico</option>
+          <option>Otro</option>
         </select>
+
       </div>
-      <div class="field"><label for="qMsg">Cuéntanos más</label><textarea id="qMsg" placeholder="Equipo, falla o proyecto"></textarea></div>
-   <button class="btn" type="submit"><svg class="ico"><use href="#i-chat"/></svg>Continuar</button>
+
+      <div class="field">
+        <label for="qMsg">Cuéntanos más</label>
+
+        <textarea
+          id="qMsg"
+          placeholder="Equipo, falla o proyecto"
+        ></textarea>
+
+      </div>
+
+      <button class="btn" type="submit">
+        <svg class="ico"><use href="#i-chat"/></svg>
+        Continuar
+      </button>
+
     </form>
+
+
+    <!-- OPCIONES DE ENVÍO -->
+
+    <div id="sendChoice" style="display:none">
+
+      <h3 style="margin-top:20px;">
+        ¿Cómo deseas enviarla?
+      </h3>
+
+      <p class="sub">
+        Selecciona una opción para enviar tu solicitud de cotización.
+      </p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;">
+
+        <button class="btn" type="button" id="sendWhatsApp">
+          <svg class="ico"><use href="#i-chat"/></svg>
+          WhatsApp
+        </button>
+
+        <button class="btn" type="button" id="sendEmail">
+          <svg class="ico"><use href="#i-mail"/></svg>
+          Correo electrónico
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 </dialog>
+<dialog id="sendChoice" aria-labelledby="sendChoiceTitle">
+  <div class="dlg">
+    <button class="close" id="sendChoiceClose" aria-label="Cerrar">
+      <svg class="ico"><use href="#i-x"/></svg>
+    </button>
 
+    <h3 id="sendChoiceTitle">¿Cómo deseas enviar tu solicitud?</h3>
+    <p class="sub">Elige una opción para continuar.</p>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+      <button class="btn" type="button" id="sendWhatsApp">
+        <svg class="ico"><use href="#i-chat"/></svg>
+        WhatsApp
+      </button>
+
+      <button class="btn" type="button" id="sendEmail">
+        <svg class="ico"><use href="#i-mail"/></svg>
+        Correo electrónico
+      </button>
+    </div>
+  </div>
+</dialog>
 <button class="wa-fab" id="waFab" aria-label="Escribir por WhatsApp"><svg class="ico"><use href="#i-chat"/></svg><span>Escríbenos</span></button>
 
 <div id="toast" role="status" aria-live="polite"></div>
@@ -1295,21 +1389,31 @@ var dlg = $('#quote'), qSvc = $('#qSvc'), qMsg = $('#qMsg');
 function openQuote(svc, msg){
   if(svc){
     var found = false;
+
     Array.prototype.forEach.call(qSvc.options, function(o){
-      if(o.text===svc){
-        qSvc.value=o.value;
-        found=true;
+      if(o.text === svc){
+        qSvc.value = o.value;
+        found = true;
       }
     });
-    if(!found) qSvc.value='Otro';
+
+    if(!found) qSvc.value = 'Otro';
   }
 
   if(msg !== undefined) qMsg.value = msg;
+
+  // Reiniciar la ventana cada vez que se abre
+  $('#qForm').style.display = '';
+  $('#sendChoice').style.display = 'none';
+  $('#qTitle').textContent = 'Solicitar cotización';
+  $('#qSubtitle').textContent = 'Llena los datos de tu solicitud.';
+
   if(!dlg.open) dlg.showModal();
 }
 
 document.addEventListener('click', function(e){
   var b = e.target.closest('[data-quote]');
+
   if(b){
     openQuote(
       b.getAttribute('data-quote'),
@@ -1323,7 +1427,7 @@ $('#qClose').addEventListener('click', function(){
 });
 
 dlg.addEventListener('click', function(e){
-  if(e.target===dlg) dlg.close();
+  if(e.target === dlg) dlg.close();
 });
 
 $('#qForm').addEventListener('submit', function(e){
@@ -1334,40 +1438,78 @@ $('#qForm').addEventListener('submit', function(e){
   var svc = qSvc.value;
   var msg = qMsg.value.trim();
 
-  var text = 'Hola TCI, soy '+name+(co?' de '+co:'')+'. Necesito: '+svc+'.'+(msg?' '+msg:'');
+  var text =
+    'Hola TCI, soy ' +
+    name +
+    (co ? ' de ' + co : '') +
+    '. Necesito: ' +
+    svc +
+    '.' +
+    (msg ? ' ' + msg : '');
 
-  var choice = confirm(
-    '¿Cómo deseas enviar tu solicitud de cotización?\n\n' +
-    'Aceptar = WhatsApp\n' +
-    'Cancelar = Correo electrónico'
-  );
+  window.quoteData = {
+    name: name,
+    co: co,
+    svc: svc,
+    msg: msg,
+    text: text
+  };
 
-  if(choice){
-    var url = 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
+  // Ocultar formulario
+  $('#qForm').style.display = 'none';
 
-    dlg.close();
-    toast('Abriendo WhatsApp con tu mensaje');
-    window.open(url, '_blank', 'noopener');
+  // Mostrar botones de envío
+  $('#sendChoice').style.display = 'block';
 
-  }else{
-    var subject = 'Solicitud de cotización - TCI';
+  // Cambiar encabezado
+  $('#qTitle').textContent = 'Enviar solicitud';
+  $('#qSubtitle').textContent =
+    'Elige cómo deseas enviar tu solicitud de cotización.';
+});
 
-    var body =
-      'Nombre: '+name+'\n'+
-      'Empresa: '+(co || 'No indicada')+'\n'+
-      'Servicio: '+svc+'\n'+
-      'Descripción: '+(msg || 'No indicada');
+$('#sendWhatsApp').addEventListener('click', function(){
 
-    var mailto =
-      'mailto:cotizaciones@tcihn.com?subject='+
-      encodeURIComponent(subject)+
-      '&body='+
-      encodeURIComponent(body);
+  var data = window.quoteData;
 
-    dlg.close();
-    toast('Abriendo correo electrónico');
-    window.location.href = mailto;
-  }
+  var url =
+    'https://wa.me/' +
+    WA_NUMBER +
+    '?text=' +
+    encodeURIComponent(data.text);
+
+  dlg.close();
+
+  toast('Abriendo WhatsApp');
+
+  window.open(url, '_blank', 'noopener');
+
+  $('#qForm').reset();
+});
+
+$('#sendEmail').addEventListener('click', function(){
+
+  var data = window.quoteData;
+
+  var subject = 'Solicitud de cotización - TCI';
+
+  var body =
+    'Hola TCI, quiero solicitar una cotización.\n\n' +
+    'Nombre: ' + data.name + '\n' +
+    'Empresa: ' + (data.co || 'No indicada') + '\n' +
+    'Servicio: ' + data.svc + '\n' +
+    'Descripción: ' + (data.msg || 'No indicada');
+
+  var mailto =
+    'mailto:cotizaciones@tcihn.com?subject=' +
+    encodeURIComponent(subject) +
+    '&body=' +
+    encodeURIComponent(body);
+
+  dlg.close();
+
+  toast('Abriendo correo electrónico');
+
+  window.location.href = mailto;
 
   $('#qForm').reset();
 });
@@ -1392,8 +1534,6 @@ $('#qForm').addEventListener('submit', function(e){
   }
 })();
 </script>
-
-
 </body>
 </html>
 
