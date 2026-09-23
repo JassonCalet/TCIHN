@@ -471,28 +471,43 @@ dialog[open]{animation:pop .25s ease}
   font-size:56px;
   color:rgba(255,255,255,.22);
   z-index:3;
-  /* MISIÓN Y VISIÓN */
-.mission-vision-grid{
+/* MISIÓN Y VISIÓN */
+
+.mission-vision-layout{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
   gap:24px;
   width:100%;
-  max-width:1100px;
+  max-width:1150px;
   margin:0 auto;
+  align-items:stretch;
+}
+
+.mission-vision-cards{
+  display:grid;
+  grid-template-rows:1fr 1fr;
+  gap:18px;
 }
 
 .mv-card{
   position:relative;
-  min-height:280px;
-  padding:38px 40px;
+  min-height:0;
+  padding:28px 30px;
   border:1px solid var(--panel-line);
-  border-radius:18px;
-  background:linear-gradient(145deg,var(--panel),rgba(255,255,255,.025));
+  border-radius:16px;
+  background:linear-gradient(
+    145deg,
+    var(--panel),
+    rgba(255,255,255,.025)
+  );
   display:flex;
-  align-items:flex-start;
-  gap:24px;
+  align-items:center;
+  gap:20px;
   overflow:hidden;
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
 }
 
 .mv-card::before{
@@ -500,22 +515,26 @@ dialog[open]{animation:pop .25s ease}
   position:absolute;
   top:0;
   left:0;
-  width:5px;
+  width:4px;
   height:100%;
-  background:linear-gradient(180deg,var(--c1),var(--c2));
+  background:linear-gradient(
+    180deg,
+    var(--c1),
+    var(--c2)
+  );
 }
 
 .mv-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 18px 40px rgba(0,0,0,.25);
+  transform:translateY(-4px);
+  box-shadow:0 16px 32px rgba(0,0,0,.22);
   border-color:rgba(240,52,63,.45);
 }
 
 .mv-icon{
-  width:62px;
-  height:62px;
-  min-width:62px;
-  border-radius:15px;
+  width:54px;
+  height:54px;
+  min-width:54px;
+  border-radius:13px;
   display:grid;
   place-items:center;
   background:rgba(217,30,42,.12);
@@ -524,88 +543,169 @@ dialog[open]{animation:pop .25s ease}
 }
 
 .mv-icon .ico{
-  width:30px;
-  height:30px;
+  width:26px;
+  height:26px;
 }
 
 .mv-content{
   flex:1;
-  padding-top:2px;
 }
 
 .mv-label{
   display:block;
-  margin-bottom:8px;
-  font-size:11px;
+  margin-bottom:6px;
+  font-size:10px;
   font-weight:700;
-  letter-spacing:1.6px;
+  letter-spacing:1.5px;
   color:var(--c2);
 }
 
 .mv-content h3{
-  margin:0 0 14px;
-  font-size:30px;
-  line-height:1.05;
+  margin:0 0 9px;
+  font-size:25px;
+  line-height:1.1;
 }
 
 .mv-content p{
   margin:0;
-  max-width:650px;
   color:var(--muted);
-  font-size:16px;
-  line-height:1.75;
+  font-size:14px;
+  line-height:1.6;
 }
 
-@media(max-width:760px){
 
-  .mission-vision-grid{
+/* IMAGEN */
+
+.mv-image{
+  position:relative;
+  min-height:100%;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--panel-line);
+  background:#111;
+}
+
+.mv-image img{
+  width:100%;
+  height:100%;
+  min-height:350px;
+  object-fit:cover;
+  display:block;
+  filter:brightness(.72) contrast(1.08);
+  transition:transform .5s ease;
+}
+
+.mv-image:hover img{
+  transform:scale(1.04);
+}
+
+.mv-image-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.05) 30%,
+      rgba(0,0,0,.82) 100%
+    );
+  pointer-events:none;
+}
+
+.mv-image-caption{
+  position:absolute;
+  left:24px;
+  right:24px;
+  bottom:22px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.mv-image-caption span{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  color:var(--c2);
+}
+
+.mv-image-caption strong{
+  font-size:18px;
+  color:#fff;
+  line-height:1.2;
+}
+
+
+/* TABLET */
+
+@media(max-width:900px){
+
+  .mission-vision-layout{
     grid-template-columns:1fr;
-    gap:18px;
+  }
+
+  .mv-image{
+    min-height:300px;
+  }
+
+  .mv-image img{
+    min-height:300px;
+  }
+
+}
+
+
+/* CELULAR */
+
+@media(max-width:600px){
+
+  .mission-vision-cards{
+    gap:14px;
   }
 
   .mv-card{
-    min-height:0;
-    padding:30px 26px;
-    gap:18px;
+    padding:23px 22px;
+    gap:16px;
   }
 
   .mv-icon{
-    width:52px;
-    height:52px;
-    min-width:52px;
+    width:48px;
+    height:48px;
+    min-width:48px;
   }
 
   .mv-icon .ico{
-    width:25px;
-    height:25px;
+    width:23px;
+    height:23px;
   }
 
   .mv-content h3{
-    font-size:26px;
+    font-size:23px;
   }
 
   .mv-content p{
-    font-size:15px;
-    line-height:1.65;
+    font-size:14px;
+    line-height:1.55;
+  }
+
+  .mv-image{
+    min-height:260px;
+  }
+
+  .mv-image img{
+    min-height:260px;
+  }
+
+  .mv-image-caption{
+    left:20px;
+    right:20px;
+    bottom:18px;
+  }
+
+  .mv-image-caption strong{
+    font-size:16px;
   }
 
 }
-
-@media(max-width:500px){
-
-  .mv-card{
-    display:block;
-    padding:28px 24px 30px;
-  }
-
-  .mv-icon{
-    margin-bottom:20px;
-  }
-  
-}
-</style>
-</head>
-<body>
 
 <!-- Iconos -->
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
@@ -1133,65 +1233,86 @@ dialog[open]{animation:pop .25s ease}
       </p>
     </div>
 
-    <div class="mission-vision-grid">
+    <div class="mission-vision-layout">
 
-      <!-- MISIÓN -->
-      <article class="mv-card">
+      <div class="mission-vision-cards">
 
-        <div class="mv-icon">
-          <svg class="ico">
-            <use href="#i-target"/>
-          </svg>
+        <!-- MISIÓN -->
+        <article class="mv-card">
+
+          <div class="mv-icon">
+            <svg class="ico">
+              <use href="#i-check"/>
+            </svg>
+          </div>
+
+          <div class="mv-content">
+
+            <span class="mv-label">NUESTRO PROPÓSITO</span>
+
+            <h3>Misión</h3>
+
+            <p>
+              Ofrecer soluciones técnicas en electricidad, automatización,
+              mecánica industrial y mantenimiento de maquinaria con altos
+              estándares de calidad y seguridad.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- VISIÓN -->
+        <article class="mv-card">
+
+          <div class="mv-icon">
+            <svg class="ico">
+              <use href="#i-cpu"/>
+            </svg>
+          </div>
+
+          <div class="mv-content">
+
+            <span class="mv-label">HACIA DÓNDE VAMOS</span>
+
+            <h3>Visión</h3>
+
+            <p>
+              Convertirnos en la empresa referente en servicios técnicos y de
+              automatización industrial en Honduras, reconocidos por nuestra
+              innovación y excelencia.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- IMAGEN INDUSTRIAL -->
+      <div class="mv-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=85"
+          alt="Tablero de control industrial"
+        >
+
+        <div class="mv-image-overlay"></div>
+
+        <div class="mv-image-caption">
+          <span>TCI</span>
+          <strong>Control · Automatización · Industria</strong>
         </div>
 
-        <div class="mv-content">
-
-          <span class="mv-label">NUESTRO PROPÓSITO</span>
-
-          <h3>Misión</h3>
-
-          <p>
-            Ofrecer soluciones técnicas en electricidad, automatización,
-            mecánica industrial y mantenimiento de maquinaria con altos
-            estándares de calidad y seguridad.
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- VISIÓN -->
-      <article class="mv-card">
-
-        <div class="mv-icon">
-          <svg class="ico">
-            <use href="#i-eye"/>
-          </svg>
-        </div>
-
-        <div class="mv-content">
-
-          <span class="mv-label">HACIA DÓNDE VAMOS</span>
-
-          <h3>Visión</h3>
-
-          <p>
-            Convertirnos en la empresa referente en servicios técnicos y de
-            automatización industrial en Honduras, reconocidos por nuestra
-            innovación y excelencia.
-          </p>
-
-        </div>
-
-      </article>
+      </div>
 
     </div>
 
   </div>
 
 </section>
-
 <!-- OPERACION -->
 <section class="s op" id="operacion" aria-labelledby="h-op">
   <div class="wrap">
