@@ -673,19 +673,19 @@ dialog[open]{animation:pop .25s ease}
     <button class="tab" role="tab" id="t-auto" aria-selected="false" aria-controls="tp" data-k="auto" tabindex="-1"><svg class="ico"><use href="#i-gear"/></svg>Automatización</button>
     <button class="tab" role="tab" id="t-elec" aria-selected="false" aria-controls="tp" data-k="elec" tabindex="-1"><svg class="ico"><use href="#i-bolt"/></svg>Electricidad</button>
     <button class="tab" role="tab" id="t-meca" aria-selected="false" aria-controls="tp" data-k="meca" tabindex="-1"><svg class="ico"><use href="#i-cogs"/></svg>Mecánica</button>
-    <button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+    <button class="tab tab-clone" data-k="mant" aria-hidden="true" tabindex="-1">
   <svg class="ico"><use href="#i-wrench"/></svg>Mantenimiento
 </button>
 
-<button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+<button class="tab tab-clone" data-k="auto" aria-hidden="true" tabindex="-1">
   <svg class="ico"><use href="#i-gear"/></svg>Automatización
 </button>
 
-<button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+<button class="tab tab-clone" data-k="elec" aria-hidden="true" tabindex="-1">
   <svg class="ico"><use href="#i-bolt"/></svg>Electricidad
 </button>
 
-<button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+<button class="tab tab-clone" data-k="meca" aria-hidden="true" tabindex="-1">
   <svg class="ico"><use href="#i-cogs"/></svg>Mecánica
 </button>
   </div>
@@ -1789,7 +1789,12 @@ dialog[open]{animation:pop .25s ease}
     tp.innerHTML = '<div><h3>'+a.t+'</h3><p>'+a.d+'</p><button class="btn" data-quote="'+a.q+'">Cotizar '+a.t.toLowerCase()+'</button></div><ul>'+a.l.map(function(x){return '<li><svg class="ico"><use href="#i-check"/></svg>'+x+'</li>'}).join('')+'</ul>';
     tp.style.animation='none'; void tp.offsetWidth; tp.style.animation='';
   }
-  var tabs = $$('.tab');
+ var tabs = $$('.tab:not(.tab-clone)');
+  $$('.tab-clone').forEach(function(clone){
+  clone.addEventListener('click', function(){
+    showArea(clone.dataset.k);
+  });
+});
   tabs.forEach(function(t,i){
     t.addEventListener('click', function(){select(i)});
     t.addEventListener('keydown', function(e){
