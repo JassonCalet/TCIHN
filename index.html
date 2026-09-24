@@ -96,7 +96,15 @@ nav.main a.active::after{content:"";position:absolute;left:12px;right:12px;botto
 /* Area tabs strip */
 .strip{margin-top:-52px;position:relative;z-index:5}
 .strip-box{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.35);overflow:hidden}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.tabs{display:flex;overflow:hidden;border-bottom:1px solid var(--line);width:max-content;min-width:100%}
+.tabs{
+  animation:trainMove 16s linear infinite;
+}
+
+@keyframes trainMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-25%)}
+}  
 .tab{display:flex;align-items:center;justify-content:center;gap:12px;padding:22px 12px;font-weight:600;color:var(--muted);position:relative;transition:color .2s,background .2s}
 .tab .ico{font-size:28px}
 .tab:hover{color:var(--ink);background:var(--surface2)}
