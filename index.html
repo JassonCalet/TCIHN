@@ -1790,8 +1790,11 @@ dialog[open]{animation:pop .25s ease}
     tp.style.animation='none'; void tp.offsetWidth; tp.style.animation='';
   }
  var tabs = $$('.tab:not(.tab-clone)');
-  $$('.tab-clone').forEach(function(clone){
+$$('.tab-clone').forEach(function(clone){
   clone.addEventListener('click', function(){
+    tabs.forEach(function(t){
+      t.setAttribute('aria-selected', t.dataset.k === clone.dataset.k);
+    });
     showArea(clone.dataset.k);
   });
 });
