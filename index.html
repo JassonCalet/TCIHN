@@ -96,15 +96,32 @@ nav.main a.active::after{content:"";position:absolute;left:12px;right:12px;botto
 /* Area tabs strip */
 .strip{margin-top:-52px;position:relative;z-index:5}
 .strip-box{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.35);overflow:hidden}
-.tabs{display:flex;overflow:hidden;border-bottom:1px solid var(--line);width:max-content;min-width:100%}
 .tabs{
-  animation:trainMove 16s linear infinite;
+  display:flex;
+  width:max-content;
+  min-width:100%;
+  border-bottom:1px solid var(--line);
+}
+  .tabs-track{
+  overflow:hidden;
+  width:100%;
+}
+  .tabs-track .tabs{
+  animation:areaTrain 12s linear infinite;
 }
 
-@keyframes trainMove{
-  from{transform:translateX(0)}
-  to{transform:translateX(-25%)}
-}  
+@keyframes areaTrain{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+.tab{
+  min-width:280px;
+  flex:0 0 280px;
+}
 .tab{display:flex;align-items:center;justify-content:center;gap:12px;padding:22px 12px;font-weight:600;color:var(--muted);position:relative;transition:color .2s,background .2s}
 .tab .ico{font-size:28px}
 .tab:hover{color:var(--ink);background:var(--surface2)}
@@ -650,12 +667,29 @@ dialog[open]{animation:pop .25s ease}
 <div class="strip">
   <div class="wrap">
     <div class="strip-box">
-      <div class="tabs" role="tablist" aria-label="Áreas de trabajo">
-        <button class="tab" role="tab" id="t-mant" aria-selected="true" aria-controls="tp" data-k="mant"><svg class="ico"><use href="#i-wrench"/></svg>Mantenimiento</button>
-        <button class="tab" role="tab" id="t-auto" aria-selected="false" aria-controls="tp" data-k="auto" tabindex="-1"><svg class="ico"><use href="#i-gear"/></svg>Automatización</button>
-        <button class="tab" role="tab" id="t-elec" aria-selected="false" aria-controls="tp" data-k="elec" tabindex="-1"><svg class="ico"><use href="#i-bolt"/></svg>Electricidad</button>
-        <button class="tab" role="tab" id="t-meca" aria-selected="false" aria-controls="tp" data-k="meca" tabindex="-1"><svg class="ico"><use href="#i-cogs"/></svg>Mecánica</button>
-      </div>
+     <div class="tabs-track">
+  <div class="tabs" role="tablist" aria-label="Áreas de trabajo">
+    <button class="tab" role="tab" id="t-mant" aria-selected="true" aria-controls="tp" data-k="mant"><svg class="ico"><use href="#i-wrench"/></svg>Mantenimiento</button>
+    <button class="tab" role="tab" id="t-auto" aria-selected="false" aria-controls="tp" data-k="auto" tabindex="-1"><svg class="ico"><use href="#i-gear"/></svg>Automatización</button>
+    <button class="tab" role="tab" id="t-elec" aria-selected="false" aria-controls="tp" data-k="elec" tabindex="-1"><svg class="ico"><use href="#i-bolt"/></svg>Electricidad</button>
+    <button class="tab" role="tab" id="t-meca" aria-selected="false" aria-controls="tp" data-k="meca" tabindex="-1"><svg class="ico"><use href="#i-cogs"/></svg>Mecánica</button>
+    <button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+  <svg class="ico"><use href="#i-wrench"/></svg>Mantenimiento
+</button>
+
+<button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+  <svg class="ico"><use href="#i-gear"/></svg>Automatización
+</button>
+
+<button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+  <svg class="ico"><use href="#i-bolt"/></svg>Electricidad
+</button>
+
+<button class="tab tab-clone" aria-hidden="true" tabindex="-1">
+  <svg class="ico"><use href="#i-cogs"/></svg>Mecánica
+</button>
+  </div>
+</div>
       <div class="tabpanel" id="tp" role="tabpanel" aria-live="polite"></div>
     </div>
   </div>
