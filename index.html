@@ -2409,6 +2409,101 @@ if('IntersectionObserver' in window){
 }
 })();
 </script>
+  <!-- Bibliotecas para la revista digital -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+  const contenedor = document.getElementById("flipbook");
+  const anterior = document.getElementById("pagina-anterior");
+  const siguiente = document.getElementById("pagina-siguiente");
+  const contador = document.getElementById("contador-paginas");
+
+  if (!contenedor || !anterior || !siguiente || !contador) return;
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  try {
+    contador.textContent = "Cargando catálogo...";
+
+    const pdf = await pdfjsLib.getDocument("./TCIcomponentes.pdf").promise;
+
+    for (let numero = 1; numero <= pdf.numPages; numero++) {
+      const paginaPDF = await pdf.getPage(numero);
+      const escala = 0.8;
+      const viewport = paginaPDF.getViewport({ scale: escala });
+
+      const canvas = document.createElement("canvas");
+      const contexto = canvas.getContext("2d");
+
+      canvas.width = Math.floor(viewport.width);
+      canvas.height = Math.floor(viewport.height);
+
+      await paginaPDF.render({
+        canvasContext: contexto,
+        viewport: viewport
+      }).promise;
+
+      const pagina = document.createElement("div");
+      pagina.className = "page";
+
+      const imagen = document.createElement("img");
+      imagen.src = canvas.toDataURL("image/jpeg", 0.85);
+      imagen.alt = "Página " + numero + " del catálogo TCI";
+      imagen.style.width = "100%";
+      imagen.style.height = "100%";
+      imagen.style.objectFit = "contain";
+
+      pagina.appendChild(imagen);
+      contenedor.appendChild(pagina);
+
+      canvas.width = 0;
+      canvas.height = 0;
+    }
+
+    const revista = new St.PageFlip(contenedor, {
+      width: 420,
+      height: 560,
+      size: "stretch",
+      minWidth: 280,
+      maxWidth: 840,
+      minHeight: 380,
+      maxHeight: 1120,
+      showCover: true,
+      usePortrait: true,
+      drawShadow: true,
+      maxShadowOpacity: 0.35,
+      flippingTime: 800,
+      mobileScrollSupport: false
+    });
+
+    revista.loadFromHTML(contenedor.querySelectorAll(".page"));
+
+    function actualizarContador() {
+      contador.textContent =
+        (revista.getCurrentPageIndex() + 1) + " / " + pdf.numPages;
+    }
+
+    anterior.addEventListener("click", function () {
+      revista.flipPrev();
+    });
+
+    siguiente.addEventListener("click", function () {
+      revista.flipNext();
+    });
+
+    revista.on("flip", actualizarContador);
+    actualizarContador();
+
+  } catch (error) {
+    console.error("Error al cargar el catálogo:", error);
+    contador.textContent =
+      "No se pudo cargar el catálogo. Comprueba que el PDF esté en GitHub.";
+  }
+});
+</script>
 </body>
 </html>
 
