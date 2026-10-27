@@ -1062,3 +1062,87 @@ footer p {
     gap: 10px;
   }
 }
+/* ========================================
+REVISTA DIGITAL TCI
+======================================== */
+
+#catalogo-revista {
+width: 100%;
+max-width: 1000px;
+min-height: 580px;
+margin: 20px auto;
+padding: 25px 10px;
+box-sizing: border-box;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+}
+
+#flipbook {
+margin: 0 auto;
+}
+
+#flipbook .page {
+background: #ffffff;
+overflow: hidden;
+}
+
+#flipbook .page img {
+display: block;
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+.catalogo-controles {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 25px;
+margin: 25px auto 0;
+}
+
+.catalogo-controles button {
+width: 48px;
+height: 48px;
+border: none;
+border-radius: 50%;
+background: #d71920;
+color: #ffffff;
+font-size: 22px;
+cursor: pointer;
+transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.catalogo-controles button:hover {
+background: #a90f15;
+transform: scale(1.08);
+}
+
+#contador-paginas {
+color: #333333;
+font-size: 15px;
+font-weight: 700;
+min-width: 70px;
+text-align: center;
+}
+
+@media (max-width: 600px) {
+#catalogo-revista {
+min-height: 400px;
+padding: 15px 0;
+margin: 10px auto;
+}
+
+.catalogo-controles {
+gap: 18px;
+margin-top: 15px;
+}
+
+.catalogo-controles button {
+width: 42px;
+height: 42px;
+font-size: 19px;
+}
+}
