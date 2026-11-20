@@ -492,24 +492,34 @@ section.visible {
   line-height: 1.8;
 }
 
-/* Espacio donde aparecerá la revista digital */
+/* CATÁLOGO DIGITAL TCI */
 
 #catalogo-revista {
   width: 100%;
-  max-width: 1000px;
-  min-height: 220px;
-  margin: 35px auto 0;
-  padding: 35px 20px;
+  max-width: 1350px;
+  min-height: 650px;
+  margin: 20px auto 0;
+  padding: 15px;
   box-sizing: border-box;
+
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-top: 4px solid #d71920;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+/* REVISTA CENTRADA */
+
+#flipbook {
+  margin: 0 auto;
+}
+
+/* TEXTO */
 
 #catalogo-revista p {
   margin: 0;
@@ -518,29 +528,33 @@ section.visible {
   line-height: 1.7;
 }
 
-/* Adaptación para celulares */
+/* CONTROLES */
+
+.catalogo-controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 25px auto;
+}
+
+/* CELULARES */
 
 @media (max-width: 600px) {
   .componentes-section {
-    padding: 50px 16px;
-  }
-
-  .componentes-section .section-tag {
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
-
-  .componentes-section h2 {
-    font-size: 29px;
-  }
-
-  .componentes-section p {
-    font-size: 15px;
+    padding: 35px 10px;
   }
 
   #catalogo-revista {
-    min-height: 180px;
-    padding: 25px 15px;
+    width: 100%;
+    min-height: 350px;
+    padding: 8px;
+    margin-top: 15px;
+  }
+
+  .catalogo-controles {
+    gap: 18px;
+    margin: 20px auto;
   }
 }
 
