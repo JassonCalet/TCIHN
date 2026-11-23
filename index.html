@@ -2432,7 +2432,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     for (let numero = 1; numero <= pdf.numPages; numero++) {
       const paginaPDF = await pdf.getPage(numero);
-      const escala = 0.8;
+      const escala = 1.5;
       const viewport = paginaPDF.getViewport({ scale: escala });
 
       const canvas = document.createElement("canvas");
@@ -2450,7 +2450,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       pagina.className = "page";
 
       const imagen = document.createElement("img");
-      imagen.src = canvas.toDataURL("image/jpeg", 0.85);
+     imagen.src = canvas.toDataURL("image/png");
       imagen.alt = "Página " + numero + " del catálogo TCI";
       imagen.style.width = "100%";
       imagen.style.height = "100%";
@@ -2463,22 +2463,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       canvas.height = 0;
     }
 
-    const revista = new St.PageFlip(contenedor, {
-      width: 420,
-      height: 560,
-      size: "stretch",
-      minWidth: 280,
-      maxWidth: 840,
-      minHeight: 380,
-      maxHeight: 1120,
-      showCover: true,
-      usePortrait: true,
-      drawShadow: true,
-      maxShadowOpacity: 0.35,
-      flippingTime: 800,
-      mobileScrollSupport: false
-    });
-
+   const revista = new St.PageFlip(contenedor, {
+  width: 550,
+  height: 733,
+  size: "stretch",
+  minWidth: 400,
+  maxWidth: 1100,
+  minHeight: 533,
+  maxHeight: 1466,
+  showCover: true,
+  usePortrait: false,
+  drawShadow: true,
+  maxShadowOpacity: 0.25,
+  flippingTime: 800,
+  mobileScrollSupport: false,
+  autoSize: true
+});
     revista.loadFromHTML(contenedor.querySelectorAll(".page"));
 
     function actualizarContador() {
