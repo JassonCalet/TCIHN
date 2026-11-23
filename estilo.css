@@ -492,38 +492,6 @@ section.visible {
   line-height: 1.8;
 }
 
-/* CATÁLOGO DIGITAL TCI */
-#catalogo-revista {
-  width: 100%;
-  max-width: 1100px;
-  min-height: 0;
-  margin: 25px auto;
-  padding: 20px 12px;
-  box-sizing: border-box;
-
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-top: 4px solid #d71920;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* REVISTA CENTRADA */
-#flipbook {
-  margin: 0 auto;
-}
-
-/* TEXTO */
-#catalogo-revista p {
-  margin: 0;
-  color: #555555;
-  font-size: 16px;
-  line-height: 1.7;
-}
 
 /* CONTROLES */
 .catalogo-controles {
@@ -1083,146 +1051,104 @@ footer p {
     gap: 10px;
   }
 }
-/* ========================================
-REVISTA DIGITAL TCI
-======================================== */
+/* ===== CATÁLOGO DIGITAL TCI: CONFIGURACIÓN LIMPIA ===== */
 
 #catalogo-revista {
-width: 100%;
-max-width: 1000px;
-min-height: 580px;
-margin: 20px auto;
-padding: 25px 10px;
-box-sizing: border-box;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 0;
+    margin: 30px auto;
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-top: 4px solid #d71920;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
 }
 
+/* Libro centrado y tamaño estable */
 #flipbook {
-margin: 0 auto;
+    width: 460px;
+    height: 613px;
+    margin: 0 auto;
+    position: relative;
 }
 
+/* Wrapper de PageFlip */
+#flipbook .stf__wrapper {
+    margin: 0 auto !important;
+}
+
+/* Páginas */
 #flipbook .page {
-background: #ffffff;
-overflow: hidden;
+    background: #ffffff;
+    overflow: hidden;
 }
 
+/* Imágenes del catálogo */
 #flipbook .page img {
-display: block;
-width: 100%;
-height: 100%;
-object-fit: contain;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
+/* Controles de navegación */
 .catalogo-controles {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 25px;
-margin: 25px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    margin: 20px auto;
 }
 
+/* Botones */
 .catalogo-controles button {
-width: 48px;
-height: 48px;
-border: none;
-border-radius: 50%;
-background: #d71920;
-color: #ffffff;
-font-size: 22px;
-cursor: pointer;
-transition: background 0.3s ease, transform 0.3s ease;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: #d71920;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .catalogo-controles button:hover {
-background: #a90f15;
-transform: scale(1.08);
+    background: #a90f15;
+    transform: scale(1.05);
 }
 
+/* Adaptación para móviles */
 @media (max-width: 600px) {
-#catalogo-revista {
-min-height: 400px;
-padding: 15px 0;
-margin: 10px auto;
-}
 
-.catalogo-controles {
-gap: 18px;
-margin-top: 15px;
-}
+    #catalogo-revista {
+        width: 100%;
+        margin: 20px auto;
+        padding: 8px 4px;
+        min-height: 0;
+    }
 
-.catalogo-controles button {
-width: 42px;
-height: 42px;
-font-size: 19px;
-}
-}
-/* AJUSTE DEL CATÁLOGO TCI: UNA SOLA PÁGINA */
+    #flipbook {
+        width: 300px;
+        height: 400px;
+    }
 
-#catalogo-revista {
-  width: 100%;
-  max-width: 1000px;
-  margin: 25px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .catalogo-controles {
+        gap: 16px;
+        margin: 15px auto;
+    }
 
-#flipbook {
-  margin: 0 auto !important;
-}
-
-#flipbook .stf__wrapper {
-  margin: 0 auto !important;
-}
-/* TAMAÑO Y CENTRADO DEFINITIVO DEL CATÁLOGO */
-
-#catalogo-revista {
-  width: 100%;
-  max-width: 1050px;
-  margin: 25px auto;
-  padding: 20px 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#flipbook {
-  margin: 0 auto !important;
-}
-
-#flipbook .stf__wrapper {
-  margin: 0 auto !important;
-}
-/* RECUPERAR Y VISUALIZAR EL CATÁLOGO */
-
-#catalogo-revista {
-  width: 100%;
-  max-width: 1100px;
-  margin: 30px auto;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: visible;
-}
-
-#flipbook {
-  width: 460px;
-  height: 613px;
-  margin: 0 auto;
-  position: relative;
-}
-
-#flipbook .page {
-  background: #ffffff;
-}
-
-#flipbook .page img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    .catalogo-controles button {
+        width: 42px;
+        height: 42px;
+        font-size: 19px;
+    }
 }
