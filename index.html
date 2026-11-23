@@ -2463,21 +2463,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       canvas.height = 0;
     }
 
-   const revista = new St.PageFlip(contenedor, {
-  width: 550,
-  height: 733,
-  size: "stretch",
-  minWidth: 400,
-  maxWidth: 1100,
-  minHeight: 533,
-  maxHeight: 1466,
+  const revista = new St.PageFlip(contenedor, {
+  width: 460,
+  height: 613,
+  size: "fixed",
+  minWidth: 460,
+  maxWidth: 460,
+  minHeight: 613,
+  maxHeight: 613,
   showCover: true,
-  usePortrait: false,
+  usePortrait: true,
   drawShadow: true,
   maxShadowOpacity: 0.25,
   flippingTime: 800,
   mobileScrollSupport: false,
-  autoSize: true
+  autoSize: false
 });
     revista.loadFromHTML(contenedor.querySelectorAll(".page"));
 
