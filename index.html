@@ -2425,66 +2425,86 @@ if (!contenedor || !anterior || !siguiente) return;
 
   try {
 
-    const pdf = await pdfjsLib.getDocument("./TCIcomponentes.pdf").promise;
+   <script>
+document.addEventListener("DOMContentLoaded", async () => {
 
-    for (let numero = 1; numero <= pdf.numPages; numero++) {
-      const paginaPDF = await pdf.getPage(numero);
-      const escala = 1.5;
-      const viewport = paginaPDF.getViewport({ scale: escala });
+    const contenedor = document.getElementById("flipbook");
+    const btnAnterior = document.getElementById("pagina-anterior");
+    const btnSiguiente = document.getElementById("pagina-siguiente");
 
-      const canvas = document.createElement("canvas");
-      const contexto = canvas.getContext("2d");
+    if (!contenedor) return;
 
-      canvas.width = Math.floor(viewport.width);
-      canvas.height = Math.floor(viewport.height);
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-      await paginaPDF.render({
-        canvasContext: contexto,
-        viewport: viewport
-      }).promise;
+    let libro;
 
-      const pagina = document.createElement("div");
-      pagina.className = "page";
+    try {
 
-      const imagen = document.createElement("img");
-     imagen.src = canvas.toDataURL("image/png");
-      imagen.alt = "Página " + numero + " del catálogo TCI";
-      imagen.style.width = "100%";
-      imagen.style.height = "100%";
-      imagen.style.objectFit = "contain";
+        const pdf = await pdfjsLib.getDocument("TCIcomponentes.pdf").promise;
 
-      pagina.appendChild(imagen);
-      contenedor.appendChild(pagina);
+        const paginas = [];
 
-      canvas.width = 0;
-      canvas.height = 0;
+        for (let i = 1; i <= pdf.numPages; i++) {
+
+            const paginaPDF = await pdf.getPage(i);
+
+            const escala = 1.3;
+            const viewport = paginaPDF.getViewport({ scale: escala });
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            await paginaPDF.render({
+                canvasContext: ctx,
+                viewport: viewport
+            }).promise;
+
+            const hoja = document.createElement("div");
+            hoja.className = "page";
+
+            const img = document.createElement("img");
+            img.src = canvas.toDataURL("image/jpeg", 0.92);
+
+            hoja.appendChild(img);
+            paginas.push(hoja);
+
+            canvas.width = 0;
+            canvas.height = 0;
+        }
+
+        contenedor.innerHTML = "";
+
+        libro = new St.PageFlip(contenedor, {
+            width: 420,
+            height: 594,
+            size: "fixed",
+            showCover: true,
+            usePortrait: true,
+            autoSize: false,
+            mobileScrollSupport: false,
+            drawShadow: true,
+            flippingTime: 600,
+            startPage: 0
+        });
+
+        libro.loadFromHTML(paginas);
+
+        if (btnAnterior) {
+            btnAnterior.onclick = () => libro.flipPrev();
+        }
+
+        if (btnSiguiente) {
+            btnSiguiente.onclick = () => libro.flipNext();
+        }
+
+    } catch (error) {
+        console.error("Error cargando el catálogo:", error);
     }
 
- const revista = new St.PageFlip(contenedor, {
-  width: 460,
-  height: 613,
-  size: "fixed",
-
-  showCover: false,
-  usePortrait: true,
-
-  drawShadow: true,
-  maxShadowOpacity: 0.15,
-  flippingTime: 700,
-
-  mobileScrollSupport: false,
-  autoSize: false,
-  startPage: 0
-});
-
-revista.loadFromHTML(contenedor.querySelectorAll(".page"));
-
-anterior.addEventListener("click", function () {
-  revista.flipPrev();
-});
-
-siguiente.addEventListener("click", function () {
-  revista.flipNext();
 });
 </script>
 </body>
