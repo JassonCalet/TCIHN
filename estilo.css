@@ -1167,3 +1167,21 @@ height: 42px;
 font-size: 19px;
 }
 }
+/* AJUSTE DEL CATÁLOGO TCI: UNA SOLA PÁGINA */
+
+#catalogo-revista {
+  width: 100%;
+  max-width: 1000px;
+  margin: 25px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#flipbook {
+  margin: 0 auto !important;
+}
+
+#flipbook .stf__wrapper {
+  margin: 0 auto !important;
+}
