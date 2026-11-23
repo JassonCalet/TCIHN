@@ -2460,50 +2460,31 @@ if (!contenedor || !anterior || !siguiente) return;
       canvas.height = 0;
     }
 
-  const revista = new St.PageFlip(contenedor, {
+ const revista = new St.PageFlip(contenedor, {
   width: 460,
   height: 613,
-
   size: "fixed",
-  minWidth: 460,
-  maxWidth: 460,
-  minHeight: 613,
-  maxHeight: 613,
 
-  showCover: true,
+  showCover: false,
   usePortrait: true,
 
   drawShadow: true,
-  maxShadowOpacity: 0.20,
+  maxShadowOpacity: 0.15,
   flippingTime: 700,
 
   mobileScrollSupport: false,
   autoSize: false,
   startPage: 0
 });
-    revista.loadFromHTML(contenedor.querySelectorAll(".page"));
 
-    function actualizarContador() {
-      contador.textContent =
-        (revista.getCurrentPageIndex() + 1) + " / " + pdf.numPages;
-    }
+revista.loadFromHTML(contenedor.querySelectorAll(".page"));
 
-    anterior.addEventListener("click", function () {
-      revista.flipPrev();
-    });
+anterior.addEventListener("click", function () {
+  revista.flipPrev();
+});
 
-    siguiente.addEventListener("click", function () {
-      revista.flipNext();
-    });
-
-    revista.on("flip", actualizarContador);
-    actualizarContador();
-
-  } catch (error) {
-    console.error("Error al cargar el catálogo:", error);
-    contador.textContent =
-      "No se pudo cargar el catálogo. Comprueba que el PDF esté en GitHub.";
-  }
+siguiente.addEventListener("click", function () {
+  revista.flipNext();
 });
 </script>
 </body>
