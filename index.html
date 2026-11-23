@@ -2466,18 +2466,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   const revista = new St.PageFlip(contenedor, {
   width: 460,
   height: 613,
+
   size: "fixed",
   minWidth: 460,
   maxWidth: 460,
   minHeight: 613,
   maxHeight: 613,
+
   showCover: true,
   usePortrait: true,
+
   drawShadow: true,
-  maxShadowOpacity: 0.25,
-  flippingTime: 800,
+  maxShadowOpacity: 0.20,
+  flippingTime: 700,
+
   mobileScrollSupport: false,
-  autoSize: false
+  autoSize: false,
+  startPage: 0
 });
     revista.loadFromHTML(contenedor.querySelectorAll(".page"));
 
