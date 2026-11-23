@@ -1177,3 +1177,22 @@ font-size: 19px;
 #flipbook .stf__wrapper {
   margin: 0 auto !important;
 }
+/* TAMAÑO Y CENTRADO DEFINITIVO DEL CATÁLOGO */
+
+#catalogo-revista {
+  width: 100%;
+  max-width: 1050px;
+  margin: 25px auto;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#flipbook {
+  margin: 0 auto !important;
+}
+
+#flipbook .stf__wrapper {
+  margin: 0 auto !important;
+}
