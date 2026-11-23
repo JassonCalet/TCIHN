@@ -1554,7 +1554,6 @@ dialog[open]{animation:pop .25s ease}
         ❮
       </button>
 
-      <span id="contador-paginas">1 / 38</span>
 
       <button id="pagina-siguiente" type="button" aria-label="Página siguiente">
         ❯
@@ -2418,15 +2417,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   const contenedor = document.getElementById("flipbook");
   const anterior = document.getElementById("pagina-anterior");
   const siguiente = document.getElementById("pagina-siguiente");
-  const contador = document.getElementById("contador-paginas");
 
-  if (!contenedor || !anterior || !siguiente || !contador) return;
+if (!contenedor || !anterior || !siguiente) return;
 
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
   try {
-    contador.textContent = "Cargando catálogo...";
 
     const pdf = await pdfjsLib.getDocument("./TCIcomponentes.pdf").promise;
 
