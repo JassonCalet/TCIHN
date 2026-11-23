@@ -1141,14 +1141,6 @@ background: #a90f15;
 transform: scale(1.08);
 }
 
-#contador-paginas {
-color: #333333;
-font-size: 15px;
-font-weight: 700;
-min-width: 70px;
-text-align: center;
-}
-
 @media (max-width: 600px) {
 #catalogo-revista {
 min-height: 400px;
